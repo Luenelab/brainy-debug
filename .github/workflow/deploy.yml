@@ -1,0 +1,51 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies and build
+        run: |
+          npm install
+          npm run build
+
+      - name: Upload build directory
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+
+      - name: Download build directory
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Interner Token nutzen
+        run: |
+          git fetch origin gh-pages:gh-pages
+          git checkout gh-pages
+          git rm -rf .
+          mv dist/* .
+          rm -r dist
+
+          git add .
+          git commit -m "Deploy latest build to GitHub Pages"
+          git push origin gh-pages
