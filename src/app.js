@@ -23,11 +23,12 @@ const App = () => {
                 setFeedback(`Error fetching file: ${error.message}`);
             }
         };
-    }, []);
-
-    const handleInputChange = (e) => {
-        setInputValue(e.target.value);
-    };
+    
+        fetchFileContent();  // Call fetchFileContent directly inside useEffect
+    
+        // Include fetchFileContent in the dependency array
+    }, [fetchFileContent]);  // <-- Include fetchFileContent here
+    
 
     const handleSubmit = async () => {
         try {
