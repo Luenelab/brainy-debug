@@ -9,7 +9,7 @@ const App = () => {
     const [feedback, setFeedback] = useState('');
 
     // Token für GitHub API
-    const token = process.env.GITHUB_TOKEN;
+    const token = process.env.REACT_APP_GITHUB_TOKEN;
 
     // useEffect-Hook zum Abrufen des Datei-Inhalts beim Laden der Komponente
     useEffect(() => {
