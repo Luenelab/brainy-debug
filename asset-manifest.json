@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/brainy-debug/static/js/main.e140d90e.js",
+    "index.html": "/brainy-debug/index.html",
+    "main.e140d90e.js.map": "/brainy-debug/static/js/main.e140d90e.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.e140d90e.js"
+  ]
+}
