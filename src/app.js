@@ -22,8 +22,8 @@ const App = () => {
                     }
                 });
                 const data = await response.json();
-                const content = JSON.parse(atob(data.content));
-                setFileContent(content); // Dateiinhalt im Zustand speichern
+                const content = atob(data.content);
+                setFileContent(JSON.parse(content)); // Dateiinhalt im Zustand speichern
             } catch (error) {
                 setFeedback(`Error fetching file: ${error.message}`); // Fehlerbehandlung
             }
@@ -55,7 +55,7 @@ const App = () => {
                 },
                 body: JSON.stringify({
                     message: 'Update Brainy-test.json',
-                    content: btoa(JSON.stringify(updatedContent)),
+                    content: btoa(JSON.stringify(updatedContent)), // Encode content in base64
                     sha: data.sha
                 })
             });
