@@ -1,4 +1,5 @@
 // src/app.js
+
 import React, { useState, useEffect } from 'react';
 
 // App-Komponente
