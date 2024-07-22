@@ -23,8 +23,17 @@ const App = () => {
                     }
                 });
                 const data = await response.json();
+                
+                // Debugging: Log raw base64 content
+                console.log('Raw base64 content:', data.content);
+
                 const content = atob(data.content);
-                setFileContent(JSON.parse(content)); // Dateiinhalt im Zustand speichern
+
+                // Debugging: Log decoded content
+                console.log('Decoded content:', content);
+
+                setFileContent(JSON.parse(content));
+            
             } catch (error) {
                 setFeedback(`Error fetching file: ${error.message}`); // Fehlerbehandlung
             }
@@ -46,6 +55,7 @@ const App = () => {
                 }
             });
             const data = await response.json();
+            console.log('Submit fetched data:', data); // Debugging log
 
             // Aktualisieren der Datei auf GitHub
             const updateResponse = await fetch('https://api.github.com/repos/Luenelab/brainy-debug/contents/brainy_brainfiles/Brainy-test.json', {
@@ -66,9 +76,12 @@ const App = () => {
                 setFileContent(updatedContent); // Zustand mit dem neuen Inhalt aktualisieren
                 setInputValue(''); // Eingabefeld leeren
             } else {
-                setFeedback('Failed to update the file.'); // Fehler bei der Aktualisierung
+                const errorResponse = await updateResponse.json();
+                console.error('Update failed:', errorResponse); // Debugging log
+                setFeedback(`Failed to update the file: ${errorResponse.message}`);
             }
         } catch (error) {
+            console.error('Error updating file:', error); // Debugging log
             setFeedback(`Error updating file: ${error.message}`); // Fehlerbehandlung
         }
     };
