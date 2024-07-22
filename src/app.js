@@ -49,7 +49,7 @@ const App = () => {
             const updatedContent = [...fileContent, inputValue];
 
             // Abrufen der Datei von GitHub
-            const response = await fetch('https://api.github.com/repos/Luenelab/brainy-debug/main/brainy_brainfiles/Brainy-test.json', {
+            const response = await fetch('https://api.github.com/repos/Luenelab/brainy-debug/contents/brainy_brainfiles/Brainy-test.json', {
                 headers: {
                     Authorization: `token ${token}`
                 }
@@ -58,7 +58,7 @@ const App = () => {
             console.log('Submit fetched data:', data); // Debugging log
 
             // Aktualisieren der Datei auf GitHub
-            const updateResponse = await fetch('https://api.github.com/repos/Luenelab/brainy-debug/main/brainy_brainfiles/Brainy-test.json', {
+            const updateResponse = await fetch('https://api.github.com/repos/Luenelab/brainy-debug/contents/brainy_brainfiles/Brainy-test.json', {
                 method: 'PUT',
                 headers: {
                     Authorization: `token ${token}`,
