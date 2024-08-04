@@ -19,8 +19,10 @@ jobs:
       - name: Install dependencies and build
         run: |
           npm install
-          REACT_APP_GITHUB_TOKEN=${{ secrets.REACT_APP_GITHUB_TOKEN }} npm run build
-          
+          npm run build
+        env:
+          REACT_APP_GITHUB_TOKEN: ${{ secrets.REACT_APP_GITHUB_TOKEN }}
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
