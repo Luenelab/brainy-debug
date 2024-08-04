@@ -2,6 +2,11 @@
 import React, { useState, useEffect } from 'react';
 
 // App-Komponente
+/**
+ * App component for the Brainy Test App.
+ *
+ * @returns {JSX.Element} The rendered App component.
+ */
 const App = () => {
     // Zustand für Eingabewert, Dateiinhalt und Feedback-Nachrichten
     const [inputValue, setInputValue] = useState('');
@@ -12,6 +17,7 @@ const App = () => {
     const token = process.env.REACT_APP_GITHUB_TOKEN;
 
 
+    // useEffect-Hook zum Abrufen des Datei-Inhalts beim Laden der Komponente
     // useEffect-Hook zum Abrufen des Datei-Inhalts beim Laden der Komponente
     useEffect(() => {
         const fetchFileContent = async () => {
@@ -39,9 +45,16 @@ const App = () => {
             }
         };
 
-        fetchFileContent(); // Abrufen des Datei-Inhalts beim Laden der Komponente
-    }, [token]); // Abhängigkeit: useEffect wird erneut ausgeführt, wenn sich das Token ändert
-
+        // Check if the token is available
+        if (token) {
+            // If the token is available, fetch the file content
+            fetchFileContent();
+        } else {
+            // If the token is not available, set feedback message
+            setFeedback('GitHub token is not set');
+        }
+    }; // Add closing bracket here
+    // Dependency array for useEffect, re-run when token changes
     // Funktion zum Handhaben des Formular-Submit
     const handleSubmit = async () => {
         try {
