@@ -11,10 +11,6 @@ const App = () => {
     // Token für GitHub API
     const token = process.env.REACT_APP_GITHUB_TOKEN;
 
-    // Debugging: Log the token to ensure it's being read correctly
-    useEffect(() => {
-        console.log('GitHub Token:', token);
-    }, [token]);
 
     // useEffect-Hook zum Abrufen des Datei-Inhalts beim Laden der Komponente
     useEffect(() => {

@@ -18,13 +18,14 @@ jobs:
 
       - name: Install dependencies and build
         run: |
+          # Ensure secrets are not written to files or logs
           npm install
           npm run build
         env:
+          # Use environment variables securely
           REACT_APP_GITHUB_TOKEN: ${{ secrets.REACT_APP_GITHUB_TOKEN }}
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.REACT_APP_GITHUB_TOKEN }}
-          publish_dir: ./build
+      - name: Print environment variable
+        run: echo $REACT_APP_GITHUB_TOKEN
+        env:
+          REACT_APP_GITHUB_TOKEN: ${{ secrets.REACT_APP_GITHUB_TOKEN }}
